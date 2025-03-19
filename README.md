@@ -1,5 +1,5 @@
-# Projet d'Intelligence Artificielle
-### Implémentation d'une Intelligence Artificielle basée sur l'algorithme Minimax et l'élagage alpha-bêta pour le Neuf Hommes de Morris
+# Minimax & Élagage Alpha-Bêta pour Neuf Hommes de Morris
+
 Ce projet propose une implémentation complète du célèbre jeu de plateau Neuf Hommes de Morris (également appelé "Jeu du Moulin"), intégrant une intelligence artificielle capable de jouer contre un humain ou contre elle-même.
 
 L'IA repose sur l'algorithme Minimax avec optimisation par élagage alpha-bêta, permettant une prise de décision efficace et intelligente.
