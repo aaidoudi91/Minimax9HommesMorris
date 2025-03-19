@@ -1,4 +1,4 @@
-# Minimax & Élagage Alpha-Bêta pour Neuf Hommes de Morris
+# Minimax & Élagage Alpha-Bêta pour le jeu du Neuf Hommes de Morris
 
 Ce projet propose une implémentation complète du célèbre jeu de plateau Neuf Hommes de Morris (également appelé "Jeu du Moulin"), intégrant une intelligence artificielle capable de jouer contre un humain ou contre elle-même.
 
