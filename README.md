@@ -36,7 +36,7 @@ En fonction, il l'éxecution se fait depuis le repertoire src via la commande (p
 python3 jeu/HumainVsIA.py
 ```
 
-## Auteurs & Crédits
+## Auteur & Crédits
 Projet réalisé dans le cadre pédagogique de l'UE d'Intelligence Artificielle
 
 Auteur : Aidoudi Aaron
