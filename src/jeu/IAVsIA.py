@@ -36,33 +36,21 @@ def jouerTourIA(plateau, joueur, phase1, heuristic):
         print(f"{couleur}L'IA {joueur} a placé un pion en position {position_ajoutee}.\033[0m")
 
     elif not phase1 and position_ajoutee is not None and position_retiree is not None:
-        print(
-            f"{couleur}L'IA {joueur} a déplacé un pion de la position {position_retiree} à la position {position_ajoutee}.\033[0m")
+        print(f"{couleur}L'IA {joueur} a déplacé un pion de la position {position_retiree} "
+            f"à la position {position_ajoutee}.\033[0m")
 
     if position_ajoutee is not None and moulinCree(position_ajoutee, plateau):
         print(f"{couleur}L'IA {joueur} a formé un moulin !\033[0m")
 
         # Trouver et afficher la pièce retirée par l'IA
-        piece_retirée = None
+        piece_retiree = None
         for i in range(len(ancien_plateau)):
             if ancien_plateau[i] != joueur and ancien_plateau[i] != 'x' and nouveau_plateau[i] == 'x':
-                piece_retirée = i
+                piece_retiree = i
                 break
 
-        if piece_retirée is not None:
-            print(f"{couleur}L'IA {joueur} a retiré un pion adverse en position {piece_retirée}.\033[0m")
-
-
-def verifierVictoire(plateau):
-    """
-    Vérifie si un joueur a gagné (si l'adversaire a moins de 3 pions ou ne peut plus bouger).
-    """
-    if nombrePion(plateau, '1') < 3 or len(mouvementsPossiblesEtape2ou3(plateau, '1')) == 0:
-        print("\033[95m\n--- L'IA 2 a gagné ! ---\033[0m")
-        exit()
-    elif nombrePion(plateau, '2') < 3 or len(mouvementsPossiblesEtape2ou3(plateau, '2')) == 0:
-        print("\033[94m\n--- L'IA 1 a gagné ! ---\033[0m")
-        exit()
+        if piece_retiree is not None:
+            print(f"{couleur}L'IA {joueur} a retiré un pion adverse en position {piece_retiree}.\033[0m")
 
 
 def AIVsAI(heuristic1, heuristic2):
@@ -86,7 +74,5 @@ def AIVsAI(heuristic1, heuristic2):
 
 
 if __name__ == "__main__":
-    print("Bienvenue sur le Jeu du Moulin - Mode IA contre IA !\n")
-
     # Lancement avec deux heuristiques différentes pour les deux IA (modifiable)
-    AIVsAI(potentialMillsHeuristic, advancedKartikHeuristic)
+    AIVsAI(heuristiqueNaive, heuristiqueAvancee)

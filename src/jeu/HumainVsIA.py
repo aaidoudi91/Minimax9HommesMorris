@@ -1,5 +1,6 @@
-"""  L'éxecution de se fichier lance le jeu en mode humain contre humain. L'IA n'est pas impliquée
-Note : ne se trouve pas dans utils.py pour mieux la différencier avec jouerTourIA() de IAVsIA.py, différente. """
+"""  L'éxecution de se fichier lance le jeu en mode humain contre IA.
+    Note : jouerTourIA() ne se trouve pas dans utils.py pour mieux la différencier avec
+    jouerTourIA() de IAVsIA.py, différente. """
 
 from src.ia.minimax import minimax
 from src.ia.heuristiques import *
@@ -74,4 +75,4 @@ def HumainVsIA(heuristic):
 
 
 if __name__ == "__main__":
-    HumainVsIA(advancedKartikHeuristic)
+    HumainVsIA(heuristiqueExperte)

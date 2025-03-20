@@ -32,7 +32,7 @@ Aucun téléchargement supplémentaire n'est nécessaire.
 - Deux IA s'affrontent, dans le fichier *IAVsIA.py*
 
 En fonction, il l'éxecution se fait depuis le repertoire src via la commande (par exemple pour HumainVsIA)
-```
+```sh
 python3 jeu/HumainVsIA.py
 ```
 
