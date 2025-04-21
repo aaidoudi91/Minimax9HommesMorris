@@ -1,5 +1,4 @@
-""" Implémente précisément l'algorithme Minimax avec élagage alpha-bêta.
-    Cette implémentation est générique, modulaire et compatible avec toutes les heuristiques proposées. """
+""" Implémente précisément l'algorithme Minimax avec élagage alpha-bêta selon le cours. """
 
 from src.ia.utils import *
 
@@ -9,11 +8,6 @@ class Evaluer:
     def __init__(self):
         self.evaluer = 0  # Valeur d'évaluation de la configuration
         self.plateau = []  # Plateau correspondant à cette évaluation
-
-
-# Variables globales pour les statistiques
-brancheElagee = 0  # Nombre d'élagages effectués
-etatsAtteints = 0  # Nombre d'états évalués
 
 
 def minimax(plateau, profondeur, maximisant, alpha, beta, etape1, heuristique):
@@ -27,8 +21,6 @@ def minimax(plateau, profondeur, maximisant, alpha, beta, etape1, heuristique):
         :param heuristique: Fonction d'évaluation heuristique utilisée.
         :return: Un objet Evaluer contenant la meilleure configuration du plateau et son score d'évaluation. """
 
-    global brancheElagee, etatsAtteints  # Accès aux variables globales pour les statistiques
-
     evaluationFinale = Evaluer()
     evaluationFinale.plateau = plateau[:]
 
@@ -36,8 +28,6 @@ def minimax(plateau, profondeur, maximisant, alpha, beta, etape1, heuristique):
     if profondeur == 0 or (not etape1 and (nombrePion(plateau, '1') < 3 or nombrePion(plateau, '2') < 3)):
         evaluationFinale.evaluer = heuristique(plateau, etape1)
         return evaluationFinale
-
-    etatsAtteints += 1  # Incrémentation du nombre d'états évalués
 
     if maximisant:  # Tour du joueur '1' (maximisant)
         meilleureValeur = float('-inf')
@@ -49,19 +39,18 @@ def minimax(plateau, profondeur, maximisant, alpha, beta, etape1, heuristique):
             if evalCourante.evaluer > meilleureValeur:
                 meilleureValeur = evalCourante.evaluer
                 evaluationFinale.plateau = config[:]
-            alpha = max(alpha, meilleureValeur)
 
-            # Vérification de l'élagage alpha-bêta
-            if beta <= alpha:
-                brancheElagee += 1  # Incrémentation du compteur d'élagage
+            alpha = max(alpha, meilleureValeur)
+            if beta <= alpha:  # Vérification de l'élagage alpha-bêta
                 break
 
+        # Attribution de la meilleure valeur à evaluer, ou si aucun coup possible la valeur de l'évaluation
         evaluationFinale.evaluer = meilleureValeur if mouvementsPossibles else heuristique(plateau, etape1)
 
     else:  # Tour du joueur '2' (minimisant, IA)
         meilleureValeur = float('inf')
-        mouvementsPossibles = mouvementsPossiblesEtape1(
-            plateauInverse(plateau)) if etape1 else mouvementsPossiblesEtape2ou3(plateauInverse(plateau), '1')
+        mouvementsPossibles = mouvementsPossiblesEtape1(plateauInverse(plateau)) if etape1 \
+            else mouvementsPossiblesEtape2ou3(plateauInverse(plateau), '1')
         mouvementsPossibles = genereListePlateauInverse(mouvementsPossibles)
 
         for config in mouvementsPossibles:
@@ -71,9 +60,7 @@ def minimax(plateau, profondeur, maximisant, alpha, beta, etape1, heuristique):
                 evaluationFinale.plateau = config[:]
             beta = min(beta, meilleureValeur)
 
-            # Vérification de l'élagage alpha-bêta
             if beta <= alpha:
-                brancheElagee += 1  # Incrémentation du compteur d'élagage
                 break
 
         evaluationFinale.evaluer = meilleureValeur if mouvementsPossibles else heuristique(plateau, etape1)
