@@ -11,11 +11,13 @@ def heuristiqueNaive(plateau, phase1):
 
     evaluation = 0
     # Nombre de moulins potentiels pour le joueur 1
+    # Évaluer les opportunités structurelles à long terme
     nombrePossibleMoulinsJoueur1 = nombrePossibleMoulins(plateau, "1")
     # Nombre de pièces du joueur 2 proches de former un moulin
+    # Mesurer les menaces immédiates dues à des moulins presque formés.
     nombrePossibleMoulinsJoueur2 = nombrePiecesMoulinEnFormation(plateau, "2")
 
-    if not phase1:  # Si nous ne sommes pas en phase 1, on détermine le nombre de pièces mobiles
+    if not phase1:  # Si pas en phase 1, détermine le nombre de pièces mobiles
         piecesMobiles = len(mouvementsPossiblesEtape2ou3(plateau))
 
         if nombrePion(plateau, '2') <= 2 or piecesMobiles == 0:  # Vérification des conditions de :
@@ -35,12 +37,12 @@ def heuristiqueNaive(plateau, phase1):
 
 def heuristiqueAvancee(plateau, phase1):
     """ Une heuristique avancée évaluant l'état du plateau en tenant compte des facteurs suivants :
-        - Nombre de pions sur le plateau.
-        - Nombre de moulins formés.
-        - Nombre de moulins potentiels (en formation).
-        - Nombre de mouvements possibles (mobilité).
-        - Blocage des mouvements adverses.
-        - Proximité d'une victoire ou d'une défaite.
+    - Nombre de pions sur le plateau.
+    - Nombre de moulins formés.
+    - Nombre de moulins potentiels (en formation).
+    - Nombre de mouvements possibles (mobilité).
+    - Blocage des mouvements adverses.
+    - Proximité d'une victoire ou d'une défaite.
         :param plateau : Liste représentant l'état actuel du plateau.
         :param phase1 : Booléen indiquant si on est à la phase 1 (placement des pions).
         :return: Une valeur numérique représentant l'évaluation de l'état du plateau. """
@@ -64,7 +66,7 @@ def heuristiqueAvancee(plateau, phase1):
         if pionsJoueur1 < 3:
             return float('-inf')  # Défaite pour le joueur maximisant
         if pionsJoueur2 < 3:
-            return float('inf')  # Victoire pour le joueur maximisant
+            return float('inf')   # Victoire pour le joueur maximisant
 
     # Contribution du nombre de pions à l'évaluation
     evaluation += poidsPions * (pionsJoueur1 - pionsJoueur2)
@@ -105,8 +107,8 @@ def heuristiqueAvancee(plateau, phase1):
 
 
 def heuristiqueExperte(plateau, phase1):
-    """ Heuristique avancée basée sur les recommandations de Kartik Kukreja, évaluant l'état du plateau en tenant
-        compte des caractéristiques suivantes :
+    """ Heuristique avancée basée sur les recommandations de diverses études (voir Sources du rapport),
+    évaluant l'état du plateau en tenant compte des caractéristiques suivantes :
         - Moulins fermés récemment.
         - Nombre total de moulins.
         - Nombre de pièces adverses bloquées.
@@ -124,7 +126,7 @@ def heuristiqueExperte(plateau, phase1):
     poidsMoulins = 26 if phase1 else 43
     poidsPionsBloques = 1 if phase1 else 10
     poidsPions = 9 if phase1 else 11
-    poidsConfig2Pions = 10 if phase1 else 8
+    poidsConfig2Pions = 10
     poidsConfig3Pions = 7 if phase1 else 1086
     poidsDoubleMoulins = 0 if phase1 else 8
     poidsConfigGagnante = 0 if phase1 else 1190
