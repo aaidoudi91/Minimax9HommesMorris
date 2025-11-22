@@ -58,6 +58,6 @@ principal et gèrer correctement les imports relatifs.*
 
 
 ## Auteur & Crédits
-Projet réalisé dans le cadre pédagogique de l'UE d'Intelligence Artificielle
+Projet réalisé dans le cadre pédagogique de l'UE d'Intelligence Artificielle de 3ème année de Licence
 
 Auteur : Aidoudi Aaron
